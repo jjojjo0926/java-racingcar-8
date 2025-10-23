@@ -3,14 +3,18 @@ package racingcar;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class Car {
-    String name;
-    int advancedTimes;
+    private String name;
+    private int advancedTimes;
 
     public static Car of(String name) {
         return new Car(name, 0);
     }
 
     private Car(String name, int advancedTimes) {
+        if (name.length() > 5) {
+            throw new IllegalArgumentException("자동차 이름은 5자를 초과할 수 없습니다.");
+        }
+
         this.name = name;
         this.advancedTimes = advancedTimes;
     }
@@ -32,5 +36,13 @@ public class Car {
             System.out.print("-");
         }
         System.out.println();
+    }
+
+    public String getName(){
+        return this.name;
+    }
+
+    public int getAdvancedTimes() {
+        return this.advancedTimes;
     }
 }
