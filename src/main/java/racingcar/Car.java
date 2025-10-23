@@ -19,10 +19,10 @@ public class Car {
         this.advancedTimes = advancedTimes;
     }
 
-    public void advance(){
+    public void advance() {
         int advanceSpace = Randoms.pickNumberInRange(0, 9);
-        if(advanceSpace>=4){
-            advancedTimes ++;
+        if (advanceSpace >= 4) {
+            advancedTimes++;
         }
     }
 
@@ -32,13 +32,13 @@ public class Car {
 
     public void printAdvancedTimes() {
         System.out.print(this.name + " : ");
-        for(int i = 0; i < this.advancedTimes; i++){
+        for (int i = 0; i < this.advancedTimes; i++) {
             System.out.print("-");
         }
         System.out.println();
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
