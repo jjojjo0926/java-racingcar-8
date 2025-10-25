@@ -1,64 +1,55 @@
 package racingcar;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class Race {
-    Queue<Car> carsInRace;
-    int lead;
+    private Queue<Car> carsInRace;
+    private int lead;
 
-    public Race(){
+    public static Race from(Queue<String> carsNameFromUser) {
+        Race race = new Race();
+
+        Set<String> participatedCars = new HashSet<>();
+
+        while (!carsNameFromUser.isEmpty()) {
+            String carName = carsNameFromUser.poll();
+
+            if (participatedCars.contains(carName)) {
+                throw new IllegalArgumentException("동일한 차량 이름이 존재합니다.");
+            }
+
+            participatedCars.add(carName);
+            race.participateInRace(carName);
+        }
+
+        return race;
+    }
+
+    private Race() {
         this.carsInRace = new LinkedList<>();
         this.lead = 0;
     }
 
-    public void participateInRace(String carName){
+    public void participateInRace(String carName) {
         carsInRace.offer(Car.of(carName));
     }
 
-    public void run(){
+    public void run() {
         Iterator<Car> iter = carsInRace.iterator();
-        while(iter.hasNext()){
+        while (iter.hasNext()) {
             Car car = iter.next();
             car.advance();
-            if(car.isLeader(lead)){
-                lead = car.advancedTimes;
+            if (car.isLeader(lead)) {
+                lead = car.getAdvancedTimes();
             }
         }
     }
 
-    public void printCarLocation(){
-        Iterator<Car> iter = carsInRace.iterator();
-        while(iter.hasNext()){
-            Car car = iter.next();
-            car.printAdvancedTimes();
-        }
-
-        System.out.println();
+    public Iterator<Car> carsIterator() {
+        return carsInRace.iterator();
     }
 
-    public void printResult() {
-        System.out.print("최종 우승자 : ");
-        Iterator<Car> iter = carsInRace.iterator();
-        Queue<Car> winners = new LinkedList<>();
-        while(iter.hasNext()){
-            Car car = iter.next();
-            if(car.isLeader(lead)){
-                winners.add(car);
-            }
-        }
-
-        boolean isFirst = true;
-        while(!winners.isEmpty()){
-            Car car = winners.poll();
-
-            if(isFirst){
-                isFirst = false;
-                System.out.print(car.name);
-            }else{
-                System.out.print(", " + car.name);
-            }
-        }
+    public boolean isLeader(Car car) {
+        return car.isLeader(this.lead);
     }
 }
