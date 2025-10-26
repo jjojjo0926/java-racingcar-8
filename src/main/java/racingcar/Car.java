@@ -10,6 +10,10 @@ public class Car {
         return new Car(name, 0);
     }
 
+    public static Car of(String name,int  advancedTimes) {
+        return new Car(name, advancedTimes);
+    }
+
     private Car(String name, int advancedTimes) {
         if (name.length() > 5) {
             throw new IllegalArgumentException("자동차 이름은 5자를 초과할 수 없습니다.");
