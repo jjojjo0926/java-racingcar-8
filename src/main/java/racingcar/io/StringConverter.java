@@ -8,13 +8,14 @@ public class StringConverter {
     public Queue<String> getCarsNameFrom(String carsNameList) {
         Queue<String> nameOfCars = new LinkedList<>();
 
-        carsNameList = carsNameList.replace(" ", "");
+        carsNameList = carsNameList.trim();
         StringTokenizer st = new StringTokenizer(carsNameList, ",");
 
         while (st.hasMoreTokens()) {
             String carName = st.nextToken();
+            carName = carName.trim();
 
-            nameOfCars.offer(carName);
+            if (!carName.isEmpty()) nameOfCars.offer(carName);
         }
 
         return nameOfCars;
