@@ -18,6 +18,8 @@ public class StringConverter {
             if (!carName.isEmpty()) nameOfCars.offer(carName);
         }
 
+        if(nameOfCars.isEmpty()) throw new IllegalArgumentException("자동차 이름을 입력하셔야 합니다.");
+
         return nameOfCars;
     }
 
