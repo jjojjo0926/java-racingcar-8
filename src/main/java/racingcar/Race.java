@@ -29,6 +29,8 @@ public class Race {
         if (participatedCars.contains(car.getName())) {
             throw new IllegalArgumentException("동일한 차량 이름이 존재합니다.");
         }
+
+        participatedCars.add(car.getName());
         carsInRace.offer(car);
     }
 
